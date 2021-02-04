@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { loremIpsum } from "lorem-ipsum";
 import { createOvermind } from "overmind";
-import { config } from "./overmind";
 import { Provider } from "overmind-react";
+import { config } from "./overmind";
 import { useState as useOvermind, useActions } from "./overmind";
 
 const overmind = createOvermind(config, { devtools: true });
@@ -26,10 +26,12 @@ const Login = () => {
       Login
       <form>
         <div>Username:</div>
-        <input id="username" ref={usernameRef} />
+        <input data-testid="username-input" id="username" ref={usernameRef} />
         <div>Password:</div>
-        <input id="password" ref={passwordRef} />
-        <div onClick={auth}>Submit</div>
+        <input data-testid="password-input" id="password" ref={passwordRef} />
+        <div data-testid="submit-btn" onClick={auth}>
+          Submit
+        </div>
       </form>
       {alert && <p>{alert}</p>}
     </div>
@@ -59,7 +61,7 @@ const Dash = () => {
   );
 };
 
-const Main = () => {
+export const Main = () => {
   const state = useOvermind();
 
   return state.user.username ? <Dash /> : <Login />;
